@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.NearbySearch" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#6C5B7B</item>
+    </style>
+</resources>

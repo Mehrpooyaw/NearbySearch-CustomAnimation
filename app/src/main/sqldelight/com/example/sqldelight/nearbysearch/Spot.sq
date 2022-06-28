@@ -1,0 +1,45 @@
+import com.example.nearbysearch.network.model.search_result.Address;
+import com.example.nearbysearch.network.model.search_result.EntryPoint;
+import com.example.nearbysearch.network.model.search_result.Poi;
+import com.example.nearbysearch.network.model.search_result.Viewport;
+import java.lang.Boolean;
+import kotlin.collections.List;
+
+
+CREATE TABLE SpotDao (
+    address TEXT AS Address,
+    dist REAL,
+    entryPoints TEXT AS List<EntryPoint>,
+    id TEXT PRIMARY KEY NOT NULL,
+    info TEXT,
+    poi TEXT AS Poi,
+    longitude REAL,
+    latitude  REAL,
+    score REAL,
+    type TEXT,
+    viewport TEXT AS Viewport,
+    isFavorite INTEGER AS Boolean DEFAULT 0 NOT NULL
+);
+
+
+selectByLonLat:
+SELECT * FROM SpotDao WHERE longitude - :radius < :lon AND longitude + :radius > :lon AND latitude - :radius < :lat AND latitude + :radius > :lat;
+
+
+insert:
+INSERT OR IGNORE INTO SpotDao VALUES ?;
+
+
+selectFavorites:
+SELECT * FROM SpotDao WHERE isFavorite = 1;
+
+deleteAll:
+DELETE FROM SpotDao;
+
+deleteById:
+DELETE FROM SpotDao WHERE id = :id;
+
+
+updateFavoriteStatus:
+UPDATE SpotDao SET  isFavorite = ? WHERE id = :id;
+
